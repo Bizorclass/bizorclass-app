@@ -1,0 +1,45 @@
+<div class="flex flex-col flex-auto min-w-0">
+  <div class="flex-auto p-4 md:p-10 flex flex-col">
+    <div class="flex-[1] rounded-md w-full flex flex-col">
+
+      <h2 class="text-[1.5rem] font-bold">History Classes</h2>
+
+      <!-- <div class="mt-4">
+        <p class="text-[1.5rem] font-normal mb-2">course Details</p>
+      </div> -->
+
+      <div class="historyClassesTeacherCardWrapper" *ngIf="classesList?.length > 0">
+        <div class="cardBox" *ngFor="let classItem of classesList">
+          <div class="teacherNameAndImageWrapper">
+            <img class="teacherImage" [src]="classItem?.teacher_id?.photo_url" (error)="onTeacherImgError($event)" alt="">
+            <div class="teacherName text-white">
+              {{classItem?.teacher_id?.first_name}} {{classItem?.teacher_id?.last_name}}
+              <div *ngIf="classItem?.teacher_id?.degree">{{classItem?.teacher_id?.degree}}</div>
+            </div>
+          </div>
+
+          <div class="classInfoWrapper">
+            <p><span class="font-bold">Date : </span> {{getDateString(classItem)}}</p>
+            <p><span class="font-bold">Time : </span> {{getTimeString(classItem)}}</p>
+            <!-- <div class="flex">
+                <p>Address&nbsp;:&nbsp;</p>
+                <p>{{classItem.address}}</p>
+            </div> -->
+            <p><span class="font-bold">Address : </span> {{classItem.address}}</p>
+
+            <div class="flex justify-end" *ngIf="classItem?.cancel_status">
+              <div class="chipItem text-white bg-red-500">
+                Booking canceled
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="classesList?.length === 0">
+        <div class="noDataWrapper">No Found History</div>
+      </ng-container>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Neusharp";
+  src: url(../assets/fonts/neusharp/NeusharpBold-7B8RV.otf);
+}
+
+.mat-mdc-snack-bar-container {
+  &.success-toast {
+    --mdc-snackbar-container-color: #07bc0c !important; /// background
+    --mat-mdc-snack-bar-button-color: #fff !important;
+    --mdc-snackbar-supporting-text-color: #fff !important;
+  }
+  &.error-toast {
+    --mdc-snackbar-container-color: #e74c3c !important; /// background
+    --mat-mdc-snack-bar-button-color: #fff !important;
+    --mdc-snackbar-supporting-text-color: #fff !important;
+  }
+}
+
+:root {
+  --color-light: #b5245f;
+  --color-dark: #6c315f;
+}
+
+body::before {
+  // content: url(../assets/images/backgroundImage.jpg);
+  // position: fixed;
+
+  content: " ";
+  background-image: url(../assets/images/backgroundImage.jpg);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+}
+
+.teacherFilterClass {
+  padding: 1rem !important;
+}
+.ConfirmCancelDialogComponentClass {
+  padding: 1rem !important;
+}
+
+.logoText {
+  font-family: 'Neusharp';
+}
+
+.otpInputContainer {
+  .ng-otp-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    input {
+      flex: 1;
+      padding: 1.5rem 0;
+      background: #ffffff;
+    }
+  }
+}
+
+.themeLoader {
+  svg {
+    stroke: var(--color-light) !important;
+  }
+}

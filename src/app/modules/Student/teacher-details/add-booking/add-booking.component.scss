@@ -1,0 +1,49 @@
+.teacherName {
+  font-size: 1rem;
+  margin: 10px 0;
+  padding: 5px 0;
+  flex: 1;
+  font-weight: 600;
+}
+.StarWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  div {
+    margin: 0.5rem;
+    cursor: pointer;
+  }
+}
+.messageWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.fc {
+  /* the calendar root */
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.fc-col-header,
+.fc-daygrid-body,
+.fc-scrollgrid-sync-table {
+  width: 100% !important;
+}
+.fc-header-toolbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 0.7rem;
+}
+.fc-non-business {
+  background: #8fdf8247 !important;
+}
+
+.bookingTypeWrapper {
+  display: flex;
+  div {
+    flex: 50%;
+  }
+}

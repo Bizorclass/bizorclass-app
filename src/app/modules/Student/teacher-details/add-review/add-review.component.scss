@@ -1,0 +1,27 @@
+.teacherName {
+  font-size: 1rem;
+  margin: 10px 0;
+  padding: 5px 0;
+  flex: 1;
+  font-weight: 600;
+}
+.StarWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  fill: var(--color-dark);
+
+  div {
+    margin: 0.5rem;
+    cursor: pointer;
+  }
+}
+.messageWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.backgroundLight {
+  background: var(--color-light) !important;
+}

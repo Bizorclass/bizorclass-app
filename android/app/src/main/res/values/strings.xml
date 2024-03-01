@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Bizorclass</string>
+    <string name="title_activity_main">Bizorclass</string>
+    <string name="package_name">com.Bizorclass.app</string>
+    <string name="custom_url_scheme">com.Bizorclass.app</string>
+</resources>

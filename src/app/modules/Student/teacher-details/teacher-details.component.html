@@ -1,0 +1,97 @@
+<div class="flex flex-col flex-auto min-w-0">
+  <div class="flex-auto p-4 md:p-10 flex flex-col">
+    <div class="flex-[1] rounded-md w-full">
+      <div class="teacherNameWrapper">
+        <div class="teacherName">
+          {{teacherDetails?.first_name}} {{teacherDetails?.last_name}}
+        </div>
+        <div class="ratingChip text-white">
+          {{teacherDetails?.rating || 0.0}}/5
+        </div>
+      </div>
+
+      <div class="profilePhoto">
+        <img class="teacherImage" [src]="teacherDetails?.photo_url" (error)="onTeacherImgError($event)" alt="">
+        <div class="teacherName">
+          {{teacherDetails?.first_name}} {{teacherDetails?.last_name}}
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <p class="text-[1.5rem] font-semibold mb-2">Teacher Details</p>
+        <p>{{teacherDetails?.about_description}}</p>
+      </div>
+
+      <div class="subscriptionButtonWrapper">
+        <!-- <button mat-fab extended class="backgroundDark" [routerLink]="['./', 'subscriptions']">
+          <mat-icon>credit_card</mat-icon>
+          Subscribe
+        </button> -->
+        <button mat-fab extended class="backgroundDark" [routerLink]="['./', 'add-review']">
+          <mat-icon>star</mat-icon>
+          Rate Teacher
+        </button>
+      </div>
+
+      <div class="mt-4">
+        <p class="text-[1.5rem] font-semibold mb-2">Medium</p>
+        <div class="infoWrapper">
+          <ng-container *ngFor="let item of teacherDetails?.language">
+            <div class="infoWrapperBox backgroundDark"> <mat-icon>g_translate</mat-icon> {{item}} </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <p class="text-[1.5rem] font-semibold mb-2">Education Board</p>
+        <div class="infoWrapper">
+          <ng-container *ngFor="let item of teacherDetails?.board">
+            <div class="infoWrapperBox backgroundDark"> <mat-icon>book</mat-icon> {{item}} </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <ng-container *ngIf="teacherDetails && teacherDetails['teacher-subject'] !== undefined && teacherDetails['teacher-subject']?.length">
+        <div class="flex flex-col">
+          <!-- <mat-icon [svgIcon]="'heroicons_outline:book-open'"></mat-icon> -->
+          <!-- <div class="min-w-0 ml-6 space-y-1"> -->
+          <p class="text-[1.5rem] font-semibold">Subjects Offered</p>
+          <div class="min-w-0 space-y-1">
+            <ng-container *ngFor="let subjectItem of teacherDetails['teacher-subject']; trackBy: trackByFn">
+              <div class="flex items-center leading-6">
+                <!-- <div class="sm:ml-3 font-mono">{{subjectItem?.subject_id?.course_id.title}}</div> -->
+                <div class="ml-2.5 font-mono" [matTooltip]="'Course Name'">{{subjectItem?.subject_id?.course_id.title}}</div>
+                <div class="text-md truncate text-secondary">
+                  <span class="mx-2">&bull;</span>
+                  <span class="font-medium" [matTooltip]="'Subject Name'">{{subjectItem?.subject_id?.title}}</span>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- <ng-container *ngIf="teacherDetails && teacherDetails?.schedule && teacherDetails?.schedule.length">
+        <div class="flex flex-col">
+          <p class="text-[1.5rem] font-semibold">Schedule Class</p>
+
+          <div class="min-w-0 space-y-1">
+            <ng-container *ngFor="let scheduleItem of teacherDetails?.schedule; trackBy: trackByFn">
+              <div class="flex justify-between items-center py-2 border-b-[1px] border-b-slate-400">
+                <p class="text-[1rem] font-medium">{{scheduleItem?.start_time}} - {{scheduleItem?.end_time}}</p>
+                <button mat-fab extended class="backgroundDark" [routerLink]="['./', 'add-booking', scheduleItem.schedule_id]">
+                  Book
+                </button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container> -->
+
+      <button mat-fab extended class="backgroundDark mt-4 w-full" [routerLink]="['./', 'add-booking']">
+        {{orderId ? 'Select Schedule' : 'Book'}}
+      </button>
+
+    </div>
+  </div>
+</div>

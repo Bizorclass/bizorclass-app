@@ -1,0 +1,27 @@
+<div class="flex flex-col flex-auto min-w-0">
+  <div class="flex-auto p-4 md:p-10 flex flex-col">
+    <div class="flex-[1] rounded-md w-full">
+      <h2 class="text-[1.5rem] font-bold">{{courseDetails?.title}}</h2>
+
+      <div class="mt-4">
+        <p class="text-[1.5rem] font-normal mb-2">Course Details</p>
+        <p>{{courseDetails?.description}}</p>
+      </div>
+
+      <div class="mt-4">
+        <p class="text-[1.5rem] font-medium mb-2">Subjects</p>
+
+        <ol class="space-y-4 text-gray-500 list-decimal list-inside dark:text-gray-400 font-semibold" *ngFor="let subjectItem of courseDetails?.subject">
+          <li>
+            {{subjectItem?.title}}
+            <p class="pl-5 mt-2 space-y-1 list-disc list-inside">
+              {{subjectItem?.description}}
+            </p>
+            <p class="pl-5 mt-2 space-y-1 list-disc list-inside font-medium text-blue-600 dark:text-blue-500 hover:underline"  [routerLink]="['./', subjectItem?.subject_id]">Show Teacher</p>
+         </li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+</div>

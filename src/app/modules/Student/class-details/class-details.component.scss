@@ -1,0 +1,184 @@
+.teacherNameWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+
+  .teacherName {
+    font-size: 1rem;
+    margin: 0 10px;
+    padding: 5px 0;
+    flex: 1;
+  }
+  .ratingChip {
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: 34px;
+    padding: 4px 0.8rem;
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+}
+.backgroundDark {
+  background: var(--color-dark) !important;
+}
+
+.profilePhoto {
+  background: #ffe4e6;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin-top: 1rem;
+  img {
+    border-radius: 50%;
+    width: 13rem;
+    height: 13rem;
+    object-fit: cover;
+  }
+  .teacherName {
+    font-size: 1rem;
+    padding: 5px 0;
+    flex: 1;
+    margin-top: 10px;
+  }
+}
+.subscriptionButtonWrapper {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  button {
+    font-size: 0.8rem;
+    flex: 1;
+    margin-right: 10px;
+    &:last-of-type {
+      margin-right: 0 !important;
+    }
+  }
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  .infoWrapperBox {
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    border-radius: 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    .mat-icon {
+      color: inherit;
+      margin-right: 10px;
+    }
+  }
+}
+.loadingWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #0000001a;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    stroke: var(--color-light) !important;
+  }
+}
+
+.chipClass {
+  button {
+    text-transform: capitalize !important;
+  }
+}
+.transferRequestChipClass {
+  background: var(--color-dark) !important;
+  button {
+    text-transform: capitalize !important;
+    .mat-mdc-chip-action-label {
+      color: #ffffff !important;
+    }
+  }
+}
+
+.cardBox {
+  padding: 0.5rem;
+  margin: 5px 0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  background: var(--color-light) !important;
+
+  .ratingChip {
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: 34px;
+    padding: 4px 0.8rem;
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+  .teacherName {
+    font-size: 1rem;
+    margin: 0 10px;
+    padding: 5px 0;
+    flex: 1;
+    .board {
+      overflow-wrap: anywhere;
+    }
+
+    .startVaccineWrapper {
+      .StarWrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin: 5px 0;
+        div {
+          //   margin: 0.5rem;
+          //   cursor: pointer;
+        }
+      }
+      .vaccinatedWrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        background: #81c355cf;
+        width: fit-content;
+        padding: 3px 8px 3px 5px;
+        border-radius: 19px;
+        margin: 5px 0;
+        p {
+          font-size: 0.6rem;
+          margin-left: 2px;
+        }
+      }
+    }
+  }
+  .teacherImage {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background: #ffffff;
+    border-radius: 9px;
+  }
+  .teacherExperience {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}

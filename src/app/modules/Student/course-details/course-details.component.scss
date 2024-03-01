@@ -1,0 +1,41 @@
+.teacherCardWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  .cardBox {
+    padding: 0.5rem;
+    margin: 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+
+    .ratingChip {
+      width: -moz-fit-content;
+      width: fit-content;
+      border-radius: 34px;
+      padding: 4px 0.8rem;
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
+    .teacherName {
+      font-size: 1rem;
+      margin: 0 10px;
+      padding: 5px 0;
+      flex: 1;
+    }
+    .teacherImage {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+    }
+    .teacherExperience {
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+}

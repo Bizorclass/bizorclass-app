@@ -1,0 +1,56 @@
+<div class="mb-1rem text-[1.5rem] font-medium">Filter</div>
+<mat-dialog-content>
+
+    <div class="mt-4">
+        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+            <mat-label>Language</mat-label>
+            <mat-select [(ngModel)]="selectedLanguage" [placeholder]="'Language'" [spellcheck]="false" multiple>
+              <ng-container *ngFor="let languageItem of LanguagesList">
+                <mat-option [value]="languageItem">{{languageItem}}</mat-option>
+              </ng-container>
+              </mat-select>
+            <mat-error>
+                Language is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="mt-4">
+        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+            <mat-label>Education board</mat-label>
+            <mat-select [(ngModel)]="selectedBoard" [placeholder]="'Education board'" [spellcheck]="false" multiple>
+              <ng-container *ngFor="let boardItem of BoardList">
+                <mat-option [value]="boardItem">{{boardItem}}</mat-option>
+              </ng-container>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="mt-4">
+        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+            <mat-label>Course</mat-label>
+            <mat-select [(ngModel)]="selectedCourse" [placeholder]="'Course'" [spellcheck]="false">
+                <ng-container *ngFor="let courseItem of coursesAndSubjectsList">
+                    <mat-option [value]="courseItem?.course_id">{{courseItem?.title}}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="mt-4">
+        <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+            <mat-label>Subject</mat-label>
+            <mat-select [(ngModel)]="selectedSubject" [placeholder]="'Course'" [spellcheck]="false" [disabled]="!selectedCourse" multiple>
+                <ng-container *ngFor="let subjectItem of getSubjectList()">
+                    <mat-option [value]="subjectItem?.subject_id">{{subjectItem?.title}}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="flex flex-row items-end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button extended [mat-dialog-close]="true" cdkFocusInitial (click)="onApply()"> Apply </button>
+</mat-dialog-actions>

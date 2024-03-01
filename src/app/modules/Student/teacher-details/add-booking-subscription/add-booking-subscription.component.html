@@ -1,0 +1,135 @@
+<div class="flex flex-col flex-auto min-w-0">
+  <div class="flex-auto p-4 md:p-10 flex flex-col">
+    <div class="flex-[1] rounded-md w-full">
+
+      <div class="font-medium text-[1.4rem] mb-2"> Booking </div>
+
+      <div class="flex flex-col gt-xs:flex-row">
+
+        <mat-form-field class="flex-auto gt-xs:pr-3">
+          <mat-label>Select Course</mat-label>
+          <mat-select [(ngModel)]="selectedCourseId" (selectionChange)="onChangeCourse($event, false)" [disabled]="orderId ? true : false">
+            <ng-container *ngFor="let courseItem of courseList">
+              <mat-option [value]="courseItem?.course_id">{{courseItem?.title}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-icon class="icon-size-5" matPrefix [svgIcon]="'mat_outline:menu_book'"></mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="flex-auto gt-xs:pr-3">
+          <mat-label>Select Subscription</mat-label>
+          <mat-select [(ngModel)]="selectedSubscriptionId" (selectionChange)="onChangeSubscription($event)" [disabled]="orderId ? true : selectedCourseId ? false : true">
+            <ng-container *ngFor="let subscriptionItem of subscriptionsList">
+              <mat-option [value]="subscriptionItem?.subscription_plan_id" class="subscriptionOptionItem">
+                <p>{{subscriptionItem?.title}}  </p>
+                <p>{{subscriptionItem?.duration_days}} Days | Rs {{subscriptionItem?.price}}</p>
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:credit-card'"></mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="flex-auto gt-xs:pr-3">
+          <mat-label>Select Time Schedule</mat-label>
+          <mat-select [(ngModel)]="selectedScheduleId" (selectionChange)="onChangeSchedule($event)" [disabled]="selectedCourseId ? false : true">
+            <ng-container *ngFor="let scheduleItem of getActiveSchedules()">
+              <mat-option [value]="scheduleItem?.schedule_id">{{scheduleItem?.start_time}} - {{scheduleItem?.end_time}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:clock'"></mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- <full-calendar [options]="calendarOptions" ></full-calendar> -->
+      <mat-form-field class="flex-auto w-full">
+        <mat-label>Choose a date</mat-label>
+        <!-- <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker"> -->
+        <input matInput [matDatepickerFilter]="scheduleDateFilter" [matDatepicker]="picker" (focus)='picker.open()' (dateChange)="handleDateClick($event)" >
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <!-- <mat-datepicker [disabled]="!(selectedCourseId && selectedSubscriptionId && selectedScheduleId)" #picker></mat-datepicker> -->
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="mb-4" *ngIf="startDate && endDate">
+        <p class="text-[0.8rem] font-semibold my-2"> Start Date: {{getDateString(startDate)}} </p>
+        <p class="text-[0.8rem] font-semibold my-2"> End Date: {{getDateString(endDate)}} </p>
+      </div>
+
+
+
+      <p class="text-[1.5rem] font-semibold my-2">Booking Type</p>
+      <div class="bookingTypeWrapper">
+        <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700" (click)="changeGroupType('single')">
+            <input [disabled]="orderId ? true : false" id="bordered-radio-1" type="radio" [(ngModel)]="booking_type" value="single" name="bordered-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="bordered-radio-1" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Individual</label>
+        </div>
+        <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700" (click)="changeGroupType('group')">
+            <input [disabled]="orderId ? true : false" id="bordered-radio-2" type="radio" [(ngModel)]="booking_type" value="group" name="bordered-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="bordered-radio-2" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Group</label>
+        </div>
+      </div>
+
+      <ng-container *ngIf="booking_type === 'group'">
+        <div class="flex flex-col w-full lg:w-2/4 lg:pl-8 mt-6">
+            <div class="text-[1rem] font-medium tracking-tight mb-4">Group students Name</div>
+            <div class="space-y-4">
+                <ng-container *ngFor="let groupDetailItem of group_details; let i = index; let first = first; let last = last; trackBy: trackByIdx">
+                    <div class="flex">
+                        <mat-form-field class="flex-auto w-full" [subscriptSizing]="'dynamic'">
+                            <mat-label *ngIf="first">Name</mat-label>
+                            <!-- <input matInput type="text" (value)="groupDetailItem" (change)="inputChange(i, $event)" [placeholder]="'Name'" [spellcheck]="false"> -->
+                            <input [disabled]="orderId ? true : false" matInput type="text" [(ngModel)]="group_details[i]" [placeholder]="'Name'" [spellcheck]="false">
+                        </mat-form-field>
+                        <!-- Remove email -->
+                        <ng-container *ngIf="group_details?.length > 2">
+                            <div class="flex items-center w-10 pl-2" [ngClass]="{'mt-6': first}">
+                                <button [disabled]="orderId ? true : false" class="w-8 h-8 min-h-8" mat-icon-button (click)="removeStudentField(i)" matTooltip="Remove">
+                                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                                </button>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+            <div *ngIf="group_details.length < 5 && !orderId" class="group inline-flex items-center mt-2 -ml-4 py-2 px-4 rounded cursor-pointer"(click)="addStudentField()">
+                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                <span class="ml-2 font-medium text-secondary group-hover:underline">Add an student</span>
+            </div>
+        </div>
+
+      </ng-container>
+
+      <div class="flex mt-4 mapWrapper">
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+        <div class="mapContainer" id="map-container"></div>
+      </div>
+
+      <!-- <div class="flex mt-4">
+        <mat-form-field class="flex-auto">
+          <mat-label>Address</mat-label>
+          <textarea [(ngModel)]="address" matInput cdkTextareaAutosize [cdkAutosizeMinRows]="3" [disabled]="orderId ? true : false"></textarea>
+          <mat-icon class="icon-size-5" matSuffix [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+        </mat-form-field>
+      </div> -->
+
+      <!--! For Razorpay  -->
+      <!-- <button *ngIf="!orderId" (click)="processToBook()" [disabled]="isBookButtonDisable()" class="backgroundLight text-white font-bold py-2 px-4 rounded-full w-full mt-4 disabled:opacity-50">
+        Book <span style="color: inherit !important;" *ngIf="selectedSubscriptionPlanDetails?.price">₹{{getPrice()}}</span>
+      </button> -->
+
+      <button *ngIf="orderId" (click)="processToChangeTeacher()" [disabled]="isBookButtonDisable()" class="backgroundLight text-white font-bold py-2 px-4 rounded-full w-full mt-4 disabled:opacity-50">
+        Send Transfer Request
+      </button>
+
+      <!--! For InstaMojo  -->
+      <button *ngIf="!orderId" (click)="instaMojo()" [disabled]="isBookButtonDisable()" class="backgroundLight text-white font-bold py-2 px-4 rounded-full w-full mt-4 disabled:opacity-50">
+        Book <span style="color: inherit !important;" *ngIf="selectedSubscriptionPlanDetails?.price">₹{{getPrice()}}</span>
+      </button>
+
+      <div class="loadingWrapper" *ngIf="isLoading">
+        <mat-spinner color="red"></mat-spinner>
+      </div>
+
+    </div>
+  </div>
+</div>

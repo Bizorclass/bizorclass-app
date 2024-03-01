@@ -1,0 +1,195 @@
+@import url("swiper/swiper.css");
+
+// #course-swiper {
+//   min-height: 100px;
+//   position: relative;
+//   width: 100%;
+// }
+.swiper-container {
+  width: 100%;
+  //   height: 400px;
+  overflow: hidden;
+}
+
+.swiper-slide {
+  //   background-color: #ccc;
+  text-align: center;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.courseSwiperItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .iconContainer {
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    position: relative;
+
+    mat-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @media (max-width: 640px) {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+  .title {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+
+    @media (max-width: 640px) {
+      font-size: 1rem;
+    }
+  }
+}
+
+#banner-swiper {
+  margin-top: 1rem;
+  position: relative;
+  min-height: 160px;
+
+  .bannerImage {
+    height: 10rem;
+    width: 100%;
+    background: #6c315f;
+    border-radius: 0.8rem;
+  }
+}
+
+mat-tab-group {
+
+  //   background: var(--color-dark);
+  .mat-mdc-tab-label-container {
+    margin: 0 !important;
+  }
+
+  .mat-mdc-tab-body-content {
+    padding: 1rem 0 !important;
+  }
+
+  .mat-mdc-tab-labels>div {
+    margin-left: 10px;
+    background-color: var(--color-dark) !important;
+    border-radius: 15px !important;
+
+    .mdc-tab__text-label {
+      color: #ffffff !important;
+    }
+
+    &:first-of-type {
+      margin-left: 0px;
+    }
+
+    // .mdc-tab-indicator--active {
+    &[aria-selected="true"] {
+      background-color: var(--color-light) !important;
+    }
+
+    .mdc-tab-indicator {
+      display: none !important;
+    }
+  }
+}
+
+.homeTeacherCardWrapper {
+  //   padding: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  //   margin: 0 -5px;
+  .cardBox {
+    padding: 0.5rem;
+    margin: 5px;
+    flex: 0 0 calc(50% - 10px);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-dark) !important;
+    position: relative;
+
+    .ratingAndVaccinateWrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .ratingChip {
+        width: fit-content;
+        border-radius: 34px;
+        padding: 3px 10px;
+        background: var(--color-light) !important;
+        font-size: 0.7rem;
+      }
+
+      .vaccinatedWrapper {
+        svg {
+          stroke: #fff;
+          fill: #81c355cf;
+        }
+      }
+    }
+
+    .teacherName {
+      font-size: 1rem;
+      padding: 5px 0;
+      text-align: center;
+
+      .teacherSubjectSortDescription {
+        box-sizing: border-box;
+        position: relative;
+        // max-height: 67px;
+        overflow: hidden;
+        padding: 0 5px;
+        //this is just for spacing out the two content divs
+        float: left;
+
+        // &:after {
+        //   content: "...";
+        //   position: absolute;
+        //   top: 4.4em;
+        //   right: 5px;
+        //   width: 1.7em;
+        //   text-align: right;
+        //   vertical-align: bottom;
+        //   background: var(--color-dark) !important;
+        // }
+      }
+    }
+
+    .teacherImageWrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 0.5rem;
+      .teacherBackgroundImage {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: blur(10px);
+      }
+      .teacherImage {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 123px;
+        border-radius: 10px;
+        object-fit: contain;
+      }
+    }
+  }
+}

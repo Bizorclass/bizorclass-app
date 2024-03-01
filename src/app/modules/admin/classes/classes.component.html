@@ -1,0 +1,117 @@
+<!-- <div class="flex flex-col flex-auto min-w-0">
+  <div class="flex-auto p-6 sm:p-10">
+    <div class="flex flex-col sm:flex-row md:flex-row flex-auto justify-between pb-8 border-b">
+      <div>
+        <div class="text-4xl font-extrabold tracking-tight leading-none">
+          Classes
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="dataSource?.length || isLoading; else noOrders">
+      <section class="overflow-auto" tabindex="0" >
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element?.index}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="student_name">
+            <th mat-header-cell *matHeaderCellDef> Student&nbsp;Name </th>
+            <td mat-cell *matCellDef="let element"> {{element?.student_name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="start_date">
+            <th mat-header-cell *matHeaderCellDef> Start&nbsp;Date </th>
+            <td mat-cell *matCellDef="let element"> {{element?.start_date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="end_date">
+            <th mat-header-cell *matHeaderCellDef> End&nbsp;Date </th>
+            <td mat-cell *matCellDef="let element"> {{element?.end_date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="start_time">
+            <th mat-header-cell *matHeaderCellDef> Start&nbsp;Time </th>
+            <td mat-cell *matCellDef="let element"> {{element?.start_time}} </td>
+          </ng-container>
+          <ng-container matColumnDef="end_time">
+            <th mat-header-cell *matHeaderCellDef> End&nbsp;Time </th>
+            <td mat-cell *matCellDef="let element"> {{element?.end_time}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </section>
+    </ng-container>
+
+    <ng-template #noOrders>
+        <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">
+            There are no classes!
+        </div>
+    </ng-template>
+  </div>
+</div> -->
+
+<div class="flex flex-col flex-auto min-w-0">
+  <div class="flex-auto p-4 md:p-10 flex flex-col">
+    <div class="flex-[1] rounded-md w-full flex flex-col">
+
+      <h2 class="text-[1.5rem] font-bold">My Classes</h2>
+
+      <!-- <div class="mt-4">
+        <p class="text-[1.5rem] font-normal mb-2">course Details</p>
+      </div> -->
+
+      <div class="myClassesTeacherCardWrapper" *ngIf="dataSource?.length > 0">
+        <div class="cardBox" *ngFor="let classItem of dataSource">
+          <!-- [routerLink]="['./', 'class-details', classItem.order_id]" -->
+          <div class="teacherNameAndImageWrapper">
+            <img class="teacherImage" [src]="classItem?.student_id?.photo_url" (error)="onTeacherImgError($event)" alt="">
+            <div class="teacherName text-white">
+              {{classItem?.student_id?.first_name}} {{classItem?.student_id?.last_name}}
+              <div *ngIf="classItem?.student_id?.degree">{{classItem?.student_id?.degree}}</div>
+            </div>
+          </div>
+
+          <div class="classInfoWrapper">
+            <p><span class="font-bold">Date : </span> {{getDateString(classItem)}}</p>
+            <p><span class="font-bold">Time : </span> {{getTimeString(classItem)}}</p>
+            <!-- <div class="flex">
+                <p>Address&nbsp;:&nbsp;</p>
+                <p>{{classItem.address}}</p>
+            </div> -->
+            <p><span class="font-bold">Address : </span> {{classItem.address}}</p>
+            <div class="flex justify-end" *ngIf="classItem?.isChangeRequestPending">
+              <div class="chipItem text-white bg-blue-500">
+                Transfer Request Pending
+              </div>
+            </div>
+            <div class="flex justify-end" *ngIf="classItem?.isChangeRequestReject">
+              <div class="chipItem text-white bg-red-500">
+                Transfer Request Reject
+              </div>
+            </div>
+            <div class="flex justify-end" *ngIf="classItem?.isChangeRequestAccept">
+              <div class="chipItem text-white bg-green-500">
+                Transfer Request Accept
+              </div>
+            </div>
+
+
+            <button (click)="openMap(classItem)" class="backgroundLight text-white font-bold py-2 px-4 rounded-full w-full mt-4">
+              Open map
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="dataSource?.length === 0">
+        <div class="noDataWrapper">No classes scheduled</div>
+      </ng-container>
+
+    </div>
+  </div>
+</div>

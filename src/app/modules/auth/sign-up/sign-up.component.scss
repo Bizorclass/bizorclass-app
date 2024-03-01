@@ -1,0 +1,10 @@
+.radioWrapper {
+  .mat-mdc-text-field-wrapper {
+    background-color: transparent !important;
+  }
+  mat-radio-button.mat-mdc-radio-checked {
+    .mdc-radio__background > div {
+      border-color: var(--color-light) !important;
+    }
+  }
+}

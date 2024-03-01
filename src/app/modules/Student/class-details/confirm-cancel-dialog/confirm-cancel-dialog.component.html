@@ -1,0 +1,15 @@
+<div class="mb-1rem text-[1.4rem] font-medium">Class Cancellation</div>
+<mat-dialog-content>
+  <div class="flex">
+    <mat-form-field class="w-full">
+      <!-- <mat-label>Cancellation Reason</mat-label> -->
+      <textarea [(ngModel)]="cancel_reason" matInput cdkTextareaAutosize [cdkAutosizeMinRows]="3" placeholder="Enter Cancellation Reason..."></textarea>
+      <!-- <mat-icon class="icon-size-5" matSuffix [svgIcon]="'heroicons_solid:location-marker'"></mat-icon> -->
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="flex flex-row items-end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button extended cdkFocusInitial (click)="onConfirm()"> Confirm </button>
+</mat-dialog-actions>
